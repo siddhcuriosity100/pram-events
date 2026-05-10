@@ -1166,12 +1166,18 @@
     if(heroVisual) heroVisual.style.transform = `translateY(${sy * 0.38}px)`;
     // Orb drift at different speeds
     heroOrbs.forEach((o, i) => { o.style.transform = `translateY(${sy * orbSpeeds[i]}px)`; });
-    // Firecracker bursts — low threshold, 2 positions per scroll event
+    // Firecracker bursts on scroll
     const delta = Math.abs(sy - lastScrollY);
     if(delta > 5) {
       spawnBurst(Math.random()*window.innerWidth, Math.random()*window.innerHeight, Math.min(Math.floor(delta/3)+6, 22));
       if(delta > 15) spawnBurst(Math.random()*window.innerWidth, Math.random()*window.innerHeight, 10);
       lastScrollY = sy;
+    }
+    // Rocket trigger: user scrolled past hero then returned to top
+    if(sy > window.innerHeight * 0.55){ heroLeft = true; }
+    else if(heroLeft && sy < window.innerHeight * 0.15){
+      heroLeft = false;
+      launchRockets();
     }
   }, {passive:true});
 
@@ -1271,18 +1277,8 @@
     }
   }
 
-  // ── IntersectionObserver: trigger rockets on return to hero ──
+  // ── Scroll-based hero return detection (more reliable than IO on mobile) ──
   let heroLeft = false;
-  const heroObs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(!e.isIntersecting){ heroLeft=true; }
-      else if(heroLeft){
-        heroLeft=false;
-        launchRockets();
-      }
-    });
-  },{threshold:0.25});
-  heroObs.observe(document.getElementById('hero'));
 
   // ── Unified render loop ──
   function renderFX(){
@@ -1367,6 +1363,6 @@
     el.addEventListener('mouseleave',()=>el.style.animationPlayState='running');
   });
 </script>
-<canvas id="fx" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:999"></canvas>
+<canvas id="fx" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998"></canvas>
 </body>
 </html>
