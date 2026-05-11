@@ -732,16 +732,20 @@
 
       <!-- Right: showreel + stats -->
       <div class="hero-right-col">
-        <button class="showreel a d4" onclick="var m=document.getElementById('reel-modal');m.style.display='flex';m.querySelector('video').play()">
+        <button class="showreel a d4" onclick="document.getElementById('reel-modal').style.display='block';document.getElementById('reel-video').play()">
           <div class="play-ring"></div>
           <div>
             <span class="sr-lbl">Watch</span>
             <span class="sr-title">Param Events — Showreel 2025</span>
           </div>
         </button>
-        <div id="reel-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:16px">
-          <button onclick="var m=document.getElementById('reel-modal');m.style.display='none';m.querySelector('video').pause();m.querySelector('video').currentTime=0" style="position:absolute;top:20px;right:28px;background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-family:'DM Sans',sans-serif;font-size:.85rem;letter-spacing:.1em;padding:8px 20px;cursor:pointer;border-radius:2px">&#x2715; HOME</button>
-          <video src="assets/final%20video.mp4" controls style="max-width:90vw;max-height:85vh;border-radius:4px" onclick="event.stopPropagation()"></video>
+        <div id="reel-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);z-index:9999;">
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:16px;">
+            <div style="width:90vw;max-width:960px;display:flex;justify-content:flex-end;">
+              <button onclick="closeReel()" style="background:none;border:1px solid rgba(255,255,255,.4);color:#fff;font-family:'DM Sans',sans-serif;font-size:.85rem;letter-spacing:.1em;padding:8px 20px;cursor:pointer;border-radius:2px;">&#x2715; HOME</button>
+            </div>
+            <video id="reel-video" src="assets/final%20video.mp4" controls style="width:90vw;max-width:960px;max-height:80vh;border-radius:4px;display:block;"></video>
+          </div>
         </div>
         <div class="hero-stats a d2">
           <div class="stat-item">
@@ -1368,6 +1372,12 @@
     el.addEventListener('mouseenter',()=>el.style.animationPlayState='paused');
     el.addEventListener('mouseleave',()=>el.style.animationPlayState='running');
   });
+  function closeReel(){
+    var v=document.getElementById('reel-video');
+    v.pause();v.currentTime=0;
+    document.getElementById('reel-modal').style.display='none';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
   document.querySelectorAll('.slideshow').forEach(function(sl){
     var imgs=sl.querySelectorAll('.sl-img'),i=0;
     setInterval(function(){imgs[i].classList.remove('active');i=(i+1)%imgs.length;imgs[i].classList.add('active');},5000);
