@@ -685,6 +685,7 @@
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
+      <a href="#" id="reel-home-btn" onclick="closeReel();return false;" style="display:none;color:var(--neon-cyan);">&#x2715; Home</a>
       <a href="#verticals">Services</a>
       <a href="#work">Our Work</a>
       <a href="#contact">Contact</a>
@@ -732,20 +733,15 @@
 
       <!-- Right: showreel + stats -->
       <div class="hero-right-col">
-        <button class="showreel a d4" onclick="document.getElementById('reel-modal').style.display='block';document.getElementById('reel-video').play()">
+        <button class="showreel a d4" onclick="openReel()">
           <div class="play-ring"></div>
           <div>
             <span class="sr-lbl">Watch</span>
             <span class="sr-title">Param Events — Showreel 2025</span>
           </div>
         </button>
-        <div id="reel-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);z-index:9999;">
-          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:16px;">
-            <div style="width:90vw;max-width:960px;display:flex;justify-content:flex-end;">
-              <button onclick="closeReel()" style="background:none;border:1px solid rgba(255,255,255,.4);color:#fff;font-family:'DM Sans',sans-serif;font-size:.85rem;letter-spacing:.1em;padding:8px 20px;cursor:pointer;border-radius:2px;">&#x2715; HOME</button>
-            </div>
-            <video id="reel-video" src="assets/final%20video.mp4" controls style="width:90vw;max-width:960px;max-height:80vh;border-radius:4px;display:block;"></video>
-          </div>
+        <div id="reel-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;">
+          <video id="reel-video" src="assets/final%20video.mp4" controls style="width:90vw;max-width:960px;max-height:85vh;border-radius:4px;display:block;"></video>
         </div>
         <div class="hero-stats a d2">
           <div class="stat-item">
@@ -1376,7 +1372,15 @@
     var v=document.getElementById('reel-video');
     v.pause();v.currentTime=0;
     document.getElementById('reel-modal').style.display='none';
+    document.getElementById('nav').style.zIndex='1000';
+    document.getElementById('reel-home-btn').style.display='none';
     window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function openReel(){
+    document.getElementById('reel-modal').style.display='block';
+    document.getElementById('nav').style.zIndex='10001';
+    document.getElementById('reel-home-btn').style.display='inline';
+    document.getElementById('reel-video').play();
   }
   document.querySelectorAll('.slideshow').forEach(function(sl){
     var imgs=sl.querySelectorAll('.sl-img'),i=0;
