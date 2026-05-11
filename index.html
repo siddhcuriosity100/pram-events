@@ -739,8 +739,9 @@
             <span class="sr-title">Param Events — Showreel 2025</span>
           </div>
         </button>
-        <div id="reel-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center" onclick="this.style.display='none';this.querySelector('video').pause();this.querySelector('video').currentTime=0">
-          <video src="assets/final%20video.mp4" controls style="max-width:90vw;max-height:90vh;border-radius:4px" onclick="event.stopPropagation()"></video>
+        <div id="reel-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:16px">
+          <button onclick="var m=document.getElementById('reel-modal');m.style.display='none';m.querySelector('video').pause();m.querySelector('video').currentTime=0" style="position:absolute;top:20px;right:28px;background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-family:'DM Sans',sans-serif;font-size:.85rem;letter-spacing:.1em;padding:8px 20px;cursor:pointer;border-radius:2px">&#x2715; HOME</button>
+          <video src="assets/final%20video.mp4" controls style="max-width:90vw;max-height:85vh;border-radius:4px" onclick="event.stopPropagation()"></video>
         </div>
         <div class="hero-stats a d2">
           <div class="stat-item">
