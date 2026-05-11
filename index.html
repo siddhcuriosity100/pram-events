@@ -685,7 +685,6 @@
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
-      <a href="#" id="reel-home-btn" onclick="closeReel();return false;" style="display:none;color:var(--neon-cyan);">&#x2715; Home</a>
       <a href="#verticals">Services</a>
       <a href="#work">Our Work</a>
       <a href="#contact">Contact</a>
@@ -741,7 +740,6 @@
           </div>
         </button>
         <div id="reel-modal" style="display:none;">
-          <button onclick="closeReel()" style="position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:10002;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.4);color:#fff;font-family:'DM Sans',sans-serif;font-size:.82rem;letter-spacing:.1em;padding:8px 24px;cursor:pointer;border-radius:2px;">&#x2715; HOME</button>
           <video id="reel-video" src="assets/final%20video.mp4" controls style="width:90vw;max-width:960px;max-height:85vh;border-radius:4px;"></video>
         </div>
         <div class="hero-stats a d2">
@@ -1373,15 +1371,13 @@
     var v=document.getElementById('reel-video');
     v.pause();v.currentTime=0;
     document.getElementById('reel-modal').style.display='none';
-    document.getElementById('nav').style.zIndex='1000';
-    document.getElementById('reel-home-btn').style.display='none';
+    document.getElementById('reel-close-btn').style.display='none';
     window.scrollTo({top:0,behavior:'smooth'});
   }
   function openReel(){
     var m=document.getElementById('reel-modal');
     m.style.cssText='display:flex;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;';
-    document.getElementById('nav').style.zIndex='10001';
-    document.getElementById('reel-home-btn').style.display='inline';
+    document.getElementById('reel-close-btn').style.display='block';
     document.getElementById('reel-video').play();
   }
   document.querySelectorAll('.slideshow').forEach(function(sl){
@@ -1389,5 +1385,6 @@
     setInterval(function(){imgs[i].classList.remove('active');i=(i+1)%imgs.length;imgs[i].classList.add('active');},5000);
   });
 </script>
+<button id="reel-close-btn" onclick="closeReel()" style="display:none;position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:10002;background:rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.45);color:#fff;font-family:'DM Sans',sans-serif;font-size:.82rem;letter-spacing:.1em;padding:10px 28px;cursor:pointer;border-radius:2px;white-space:nowrap;">&#x2715; HOME</button>
 </body>
 </html>
