@@ -732,7 +732,7 @@
 
       <!-- Right: showreel + stats -->
       <div class="hero-right-col">
-        <button class="showreel a d4" onclick="document.getElementById('reel-modal').style.display='flex'">
+        <button class="showreel a d4" onclick="var m=document.getElementById('reel-modal');m.style.display='flex';m.querySelector('video').play()">
           <div class="play-ring"></div>
           <div>
             <span class="sr-lbl">Watch</span>
