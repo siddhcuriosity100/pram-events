@@ -1385,6 +1385,6 @@
     setInterval(function(){imgs[i].classList.remove('active');i=(i+1)%imgs.length;imgs[i].classList.add('active');},5000);
   });
 </script>
-<button id="reel-close-btn" onclick="closeReel()" style="display:none;position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:10002;background:rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.45);color:#fff;font-family:'DM Sans',sans-serif;font-size:.82rem;letter-spacing:.1em;padding:10px 28px;cursor:pointer;border-radius:2px;white-space:nowrap;">&#x2715; HOME</button>
+<div id="reel-close-btn" onclick="closeReel()" style="display:none;position:fixed;top:0;left:0;width:100%;z-index:10002;background:rgba(0,0,0,.85);text-align:center;padding:14px 0;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.85rem;letter-spacing:.12em;color:#fff;border-bottom:1px solid rgba(255,255,255,.2);">&#x2715;&nbsp;&nbsp;HOME</div>
 </body>
 </html>
