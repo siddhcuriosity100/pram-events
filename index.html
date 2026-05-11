@@ -630,6 +630,9 @@
       .work-hdr{flex-direction:column;align-items:flex-start;gap:16px}
       .work-grid{grid-template-columns:1fr}
       .wc-img{height:260px}
+    .slideshow{position:relative;width:100%;height:100%}
+    .sl-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
+    .sl-img.active{opacity:1}
 
       .testi{padding:72px 0}
       .cta{padding:72px 0}
@@ -728,13 +731,16 @@
 
       <!-- Right: showreel + stats -->
       <div class="hero-right-col">
-        <button class="showreel a d4" onclick="alert('Showreel coming soon.')">
+        <button class="showreel a d4" onclick="document.getElementById('reel-modal').style.display='flex'">
           <div class="play-ring"></div>
           <div>
             <span class="sr-lbl">Watch</span>
             <span class="sr-title">Param Events — Showreel 2025</span>
           </div>
         </button>
+        <div id="reel-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center" onclick="this.style.display='none';this.querySelector('video').pause();this.querySelector('video').currentTime=0">
+          <video src="assets/final%20video.mp4" controls style="max-width:90vw;max-height:90vh;border-radius:4px" onclick="event.stopPropagation()"></video>
+        </div>
         <div class="hero-stats a d2">
           <div class="stat-item">
             <span class="stat-n" data-target="50" data-sfx="+">50+</span>
@@ -913,10 +919,12 @@
       <!-- Flagship: PARAM Navratri — full event hosted by Param Events -->
       <div class="wc a" data-anim="scaleIn" style="--wc-color:var(--neon-gold)">
         <div class="wc-img navratri">
-          <!-- Replace src with actual photo: <img src="assets/navratri-2024.jpg" alt="PARAM Navratri 2024" loading="lazy" style="width:100%;height:100%;object-fit:cover"> -->
-          <div class="wc-ph-txt">
-            <span class="wc-ph-icon">🪔</span>
-            <span class="wc-ph-lbl">Event Photo</span>
+          <div class="slideshow" id="sl-garba">
+            <img src="assets/Garba/WhatsApp%20Image%202026-05-10%20at%2017.07.02.jpeg" class="sl-img active" loading="lazy" alt="PARAM Navratri 2024">
+            <img src="assets/Garba/WhatsApp%20Image%202026-05-10%20at%2017.08.27.jpeg" class="sl-img" loading="lazy" alt="PARAM Navratri 2024">
+            <img src="assets/Garba/WhatsApp%20Image%202026-05-10%20at%2017.09.29.jpeg" class="sl-img" loading="lazy" alt="PARAM Navratri 2024">
+            <img src="assets/Garba/WhatsApp%20Image%202026-05-10%20at%2017.10.27.jpeg" class="sl-img" loading="lazy" alt="PARAM Navratri 2024">
+            <img src="assets/Garba/WhatsApp%20Image%202026-05-10%20at%2017.14.28.jpeg" class="sl-img" loading="lazy" alt="PARAM Navratri 2024">
           </div>
         </div>
         <div class="wc-info">
@@ -929,10 +937,11 @@
       <!-- Corporate Events -->
       <div class="wc a" data-anim="scaleIn" style="--wc-color:var(--neon-cyan)">
         <div class="wc-img corporate">
-          <!-- Replace src with actual photo: <img src="assets/event-corp.jpg" alt="Corporate Event" loading="lazy" style="width:100%;height:100%;object-fit:cover"> -->
-          <div class="wc-ph-txt">
-            <span class="wc-ph-icon">🏢</span>
-            <span class="wc-ph-lbl">Event Photo</span>
+          <div class="slideshow" id="sl-corp">
+            <img src="assets/corporate/WhatsApp%20Image%202026-05-09%20at%2018.09.04.jpeg" class="sl-img active" loading="lazy" alt="Corporate Event">
+            <img src="assets/corporate/WhatsApp%20Image%202026-05-09%20at%2018.09.05.jpeg" class="sl-img" loading="lazy" alt="Corporate Event">
+            <img src="assets/corporate/WhatsApp%20Image%202026-05-10%20at%2017.44.57.jpeg" class="sl-img" loading="lazy" alt="Corporate Event">
+            <img src="assets/corporate/WhatsApp%20Image%202026-05-10%20at%2017.53.12.jpeg" class="sl-img" loading="lazy" alt="Corporate Event">
           </div>
         </div>
         <div class="wc-info">
@@ -1356,6 +1365,10 @@
     if(!el) return;
     el.addEventListener('mouseenter',()=>el.style.animationPlayState='paused');
     el.addEventListener('mouseleave',()=>el.style.animationPlayState='running');
+  });
+  document.querySelectorAll('.slideshow').forEach(function(sl){
+    var imgs=sl.querySelectorAll('.sl-img'),i=0;
+    setInterval(function(){imgs[i].classList.remove('active');i=(i+1)%imgs.length;imgs[i].classList.add('active');},10000);
   });
 </script>
 </body>
